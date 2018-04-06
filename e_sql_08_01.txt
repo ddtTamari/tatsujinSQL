@@ -18,6 +18,8 @@
 SELECT DISTINCT  key                 -- オール1のKeyを取り出したいので結果が重複しないよう取り出す
   FROM ArrayTbl2 Tbl1                -- 検索対象のArrayTbl2を指定し後程結合で使うので別名で指定
  WHERE NOT EXISTS                    -- 下記条件に当てはまらないものを取得する
+                                     -- ①valの値が1ではないもの
+                                     -- ②valの値が2ではないもの
   (SELECT * FROM ArrayTbl2 Tbl2      -- 検索対象のArrayTbl2を指定し自己結合のため別名を指定
     WHERE Tbl1.key = Tbl2.key        -- 一行一行調べたいのでKeyをもとに結合する
       AND (Tbl2.val <> 1             -- Valが1のものを取り出したいので1以外を除外する
